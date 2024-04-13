@@ -22,7 +22,12 @@ const SubscriptionButton = ({ isProMember }: Props) => {
   };
 
   return (
-    <Button disabled={loading} onClick={handleSubstription} variant="outline">
+    <Button
+      disabled={loading}
+      onClick={handleSubstription}
+      variant="outline"
+      className="text-black"
+    >
       {isProMember ? "Manage subscription" : "Get PRO"}
     </Button>
   );
