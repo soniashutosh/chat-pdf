@@ -1,4 +1,4 @@
-"use server"; 
+"use server";
 import {
   Document,
   RecursiveCharacterTextSplitter,
@@ -49,7 +49,7 @@ export async function loadS3IntoPinecone(fileKey: string) {
   const client = await getPineconeClient();
   const pineconeIndex = await client.Index("chat-pdf");
   const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
-  console.log("Inserting vectors into the pinecone ...");
+  console.log("Inserting vectors into the pinecone ...", vectors);
   await namespace.upsert(vectors);
 
   return documents[0];
@@ -64,8 +64,8 @@ async function embedDocument(doc: Document) {
       id: hash,
       values: embeddings,
       metadata: {
-        text: doc.metadata.text,
-        pageNumber: doc.metadata.pageNumber,
+        text: await doc.metadata.text,
+        pageNumber: await doc.metadata.pageNumber,
       },
     } as PineconeRecord;
   } catch (error) {

@@ -1,6 +1,7 @@
-'use'
+"use";
 import { S3 } from "@aws-sdk/client-s3";
 import fs from "fs";
+import os from "os";
 import path from "path";
 
 export async function downloadFromS3(file_key: string): Promise<string> {
@@ -20,11 +21,12 @@ export async function downloadFromS3(file_key: string): Promise<string> {
 
       const obj = await s3.getObject(params);
       const file_name = path.join(
-        __dirname,
-        `tmp/pdf-${Date.now().toString()}.pdf`
+        process.cwd(),
+        `/tmp/pdf-${Date.now().toString()}.pdf`
       );
 
       const dir = path.dirname(file_name);
+      console.log("directory where file is being created", file_name);
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
