@@ -1,4 +1,4 @@
-"use";
+"use server";
 import { S3 } from "@aws-sdk/client-s3";
 import fs from "fs";
 import os from "os";
@@ -20,10 +20,7 @@ export async function downloadFromS3(file_key: string): Promise<string> {
       };
 
       const obj = await s3.getObject(params);
-      const file_name = path.join(
-        process.cwd(),
-        `/tmp/pdf-${Date.now().toString()}.pdf`
-      );
+      const file_name = `/tmp/pdf${Date.now().toString()}.pdf`;
 
       const dir = path.dirname(file_name);
       console.log("directory where file is being created", file_name);
