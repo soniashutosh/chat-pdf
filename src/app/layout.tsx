@@ -20,6 +20,9 @@ export default function RootLayout({
     <ClerkProvider>
       <Providers>
         <html lang="en">
+          <head>
+            <link rel="icon" type="image/x-icon" href="/vercel.svg"></link>
+          </head>
           <body className={inter.className}>{children}</body>
           {/* Fix the hydration error coming up becuase of this toaster component as it refreshes the page and content before and after is not matching... */}
           <Toaster />
